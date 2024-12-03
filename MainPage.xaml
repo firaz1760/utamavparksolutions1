@@ -1,4 +1,4 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UTAMavParkSolutions.MainPage"
              NavigationPage.HasNavigationBar="False">
@@ -420,41 +420,41 @@
 
                 <!-- Title -->
                 <Label Grid.Row="0"
-                       Text="Parking Detail"
-                       FontSize="22"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       TextColor="Black"
-                       Margin="0,10,0,5" />
+           Text="Parking Detail"
+           FontSize="22"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"
+           TextColor="Black"
+           Margin="0,10,0,5" />
 
                 <!-- Illustration -->
                 <Image Grid.Row="1"
-                       Source="parking_illustration.png"
-                       Aspect="AspectFit"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center" />
+           Source="parking_illustration.png"
+           Aspect="AspectFit"
+           HorizontalOptions="Center"
+           VerticalOptions="Center" />
 
                 <!-- Time Duration -->
                 <StackLayout Grid.Row="2" VerticalOptions="Start" Margin="0,10,0,10">
                     <Label Text="Time Duration"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           TextColor="Black"
-                           HorizontalOptions="Start" />
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Start" />
                     <Slider x:Name="DurationSlider"
-                            Minimum="1"
-                            Maximum="24"
-                            Value="4"
-                            ThumbColor="#4A90E2"
-                            MinimumTrackColor="#4A90E2"
-                            MaximumTrackColor="#E0E0E0"
-                            Margin="0,5,0,0" />
+                Minimum="1"
+                Maximum="24"
+                Value="4"
+                ThumbColor="#4A90E2"
+                MinimumTrackColor="#4A90E2"
+                MaximumTrackColor="#E0E0E0"
+                Margin="0,5,0,0" />
                     <Label x:Name="DurationLabel"
-                           Text="4 hrs"
-                           FontSize="12"
-                           TextColor="Black"
-                           HorizontalOptions="Start"
-                           Margin="0,5,0,0" />
+               Text="4 hrs"
+               FontSize="12"
+               TextColor="Black"
+               HorizontalOptions="Start"
+               Margin="0,5,0,0" />
                 </StackLayout>
 
                 <!-- Parking Details -->
@@ -469,33 +469,83 @@
 
                 <!-- DatePicker -->
                 <DatePicker Grid.Row="5"
-                            x:Name="CalendarDatePicker"
-                            IsVisible="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
+                x:Name="CalendarDatePicker"
+                IsVisible="False"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
 
                 <!-- Buttons -->
                 <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Spacing="20" Margin="10,10,10,10">
                     <Button Text="Calendar"
-                            BackgroundColor="#4A90E2"
-                            TextColor="White"
-                            CornerRadius="20"
-                            HeightRequest="50"
-                            HorizontalOptions="FillAndExpand"
-                            Clicked="OnCalendarClicked" />
+                BackgroundColor="#4A90E2"
+                TextColor="White"
+                CornerRadius="20"
+                HeightRequest="50"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnCalendarClicked" />
                     <Button Text="Confirm &amp; Pay"
-                            BackgroundColor="#4A90E2"
-                            TextColor="White"
-                            CornerRadius="20"
-                            HeightRequest="50"
-                            HorizontalOptions="FillAndExpand"
-                            Clicked="OnConfirmPayClicked" />
+                BackgroundColor="#4A90E2"
+                TextColor="White"
+                CornerRadius="20"
+                HeightRequest="50"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnConfirmPayClicked" />
                 </StackLayout>
+            </Grid>
+
+            <!-- Payment Content -->
+            <Grid x:Name="PaymentContent" IsVisible="False" Padding="10" BackgroundColor="#F3F4F6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Title Row -->
+                    <RowDefinition Height="*" />
+                    <!-- Form Row -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Pay Button Row -->
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <Label Grid.Row="0"
+           Text="Payment Screen"
+           FontSize="22"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"
+           TextColor="Black"
+           Margin="0,20,0,10" />
+
+                <!-- Payment Form -->
+                <StackLayout Grid.Row="1" Spacing="15" Padding="20">
+                    <Entry Placeholder="Card Number" Keyboard="Numeric" />
+                    <Entry Placeholder="Cardholder Name" />
+                    <Entry Placeholder="Expiration Date (MM/YY)" Keyboard="Numeric" />
+                    <Entry Placeholder="CVV" Keyboard="Numeric" IsPassword="True" />
+                </StackLayout>
+
+                <!-- Image of a Card -->
+                <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                    <Image Source="card_image.png"
+               Aspect="AspectFit"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               HeightRequest="180"
+               Margin="0,80,0,0" />
+                </StackLayout>
+
+                <!-- Pay Button -->
+                <Button Grid.Row="2"
+            Text="Pay Now"
+            BackgroundColor="#4A90E2"
+            TextColor="White"
+            CornerRadius="10"
+            HeightRequest="50"
+            Margin="20,10,20,10"
+            HorizontalOptions="Fill"
+            VerticalOptions="End"
+            Clicked="OnPaymentCompleted" />
             </Grid>
 
             <!-- Parking Ticket Content -->
             <Grid x:Name="ParkingTicketContent" IsVisible="False" Padding="10" BackgroundColor="#4A90E2">
-                <!-- Root Grid Layout -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <!-- Title Row -->
@@ -517,7 +567,6 @@
 
                 <!-- Content -->
                 <StackLayout Grid.Row="1" Spacing="15" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                    <!-- Parking Details -->
                     <Frame BackgroundColor="White" CornerRadius="10" Padding="20" Margin="0,10" HorizontalOptions="Center" VerticalOptions="Center">
                         <StackLayout>
                             <Label Text="Parking West Campus Garage"
@@ -525,13 +574,11 @@
                        FontAttributes="Bold"
                        TextColor="Black"
                        HorizontalOptions="Center" />
-                            <Label Text="550 S Center St Arlington, TX 76010"
+                            <Label Text="440 S Nedderman Dr, Arlington, TX 76013"
                        FontSize="12"
                        TextColor="Gray"
                        HorizontalOptions="Center" />
-
                             <BoxView HeightRequest="1" BackgroundColor="#E0E0E0" Margin="0,10" />
-
                             <Label Text="VEHICLE"
                        FontSize="12"
                        FontAttributes="Bold"
@@ -542,7 +589,6 @@
                        TextColor="Black"
                        Margin="0,0,0,10"
                        HorizontalOptions="Start" />
-
                             <Label Text="DURATION"
                        FontSize="12"
                        FontAttributes="Bold"
@@ -553,7 +599,6 @@
                        TextColor="Black"
                        Margin="0,0,0,10"
                        HorizontalOptions="Start" />
-
                             <Label Text="Slot A01"
                        FontSize="18"
                        FontAttributes="Bold"
