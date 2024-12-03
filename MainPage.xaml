@@ -1,0 +1,580 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UTAMavParkSolutions.MainPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <!-- Splash Screen -->
+            <StackLayout x:Name="SplashScreen" IsVisible="True" VerticalOptions="FillAndExpand" BackgroundColor="White">
+                <Image Source="splash_image.png" 
+                       Aspect="AspectFit" 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center" 
+                       HeightRequest="200" />
+            </StackLayout>
+
+            <!-- Login Screen -->
+            <Grid x:Name="LoginContent" IsVisible="False" Padding="20">
+                <StackLayout VerticalOptions="FillAndExpand">
+                    <Label Text="LOOKING FOR PARKING PLACES?"
+                           FontSize="22" 
+                           FontAttributes="Bold"
+                           TextColor="#1E40FF"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,20,0,10" />
+                    <Image Source="parking_illustration.png"
+                           Aspect="AspectFit"
+                           HorizontalOptions="FillAndExpand"
+                           HeightRequest="150"
+                           Margin="0,0,0,20" />
+                    <Label Text="Login or Register to your UTA MavPark Account"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center"
+                           TextColor="#000000"
+                           Margin="0,10,0,20" />
+                    <StackLayout>
+                        <Label Text="Phone Number" 
+                               FontSize="16" 
+                               TextColor="#000000" 
+                               Margin="0,0,0,5" />
+                        <Frame CornerRadius="10" 
+                               BackgroundColor="#F0F0F0" 
+                               Padding="10" 
+                               HeightRequest="60">
+                            <Entry x:Name="PhoneNumberEntry" 
+                                   Placeholder="Enter your Mobile No" 
+                                   PlaceholderColor="#A9A9A9" 
+                                   Keyboard="Telephone" 
+                                   FontSize="16" 
+                                   BackgroundColor="Transparent" 
+                                   TextColor="Black" 
+                                   ClearButtonVisibility="WhileEditing" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout VerticalOptions="EndAndExpand" Spacing="10" Margin="0,20,0,20">
+                        <Button Text="Login" 
+                                BackgroundColor="#4A90E2" 
+                                TextColor="White" 
+                                CornerRadius="10" 
+                                HeightRequest="50" 
+                                FontSize="16" 
+                                Clicked="OnLoginClicked" />
+                        <Label Text="OR" 
+                               HorizontalTextAlignment="Center" 
+                               FontAttributes="Bold" 
+                               Margin="0,5,0,5" />
+                        <Button Text="Register" 
+                                BackgroundColor="#4A90E2" 
+                                TextColor="White" 
+                                CornerRadius="10" 
+                                HeightRequest="50" 
+                                FontSize="16" 
+                                Clicked="OnRegisterClicked" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+            <!-- Register Screen -->
+            <Grid x:Name="RegisterContent" IsVisible="False" Padding="20">
+                <StackLayout Spacing="15" VerticalOptions="FillAndExpand">
+                    <Label Text="Register your account"
+                           FontSize="22" 
+                           FontAttributes="Bold"
+                           TextColor="#1E40FF"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,20,0,0" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Already registered your account? " 
+                               FontSize="14" 
+                               TextColor="#000000" />
+                        <Label Text="Log in."
+                               FontSize="14" 
+                               TextColor="#1E40FF"
+                               FontAttributes="Bold"
+                               GestureRecognizers="{TapGestureRecognizer Command={Binding NavigateToLogin}}" />
+                    </StackLayout>
+                    <Image Source="parking_illustration.png"
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center"
+                           HeightRequest="150"
+                           Margin="0,20,0,10" />
+                    <Label Text="Enter your details to continue using our app"
+                           FontSize="16" 
+                           TextColor="#000000"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,0,0,10" />
+                    <StackLayout>
+                        <Label Text="Name" 
+                               FontSize="16" 
+                               TextColor="#000000" 
+                               Margin="0,0,0,5" />
+                        <Frame CornerRadius="10" 
+                               BackgroundColor="#F0F0F0" 
+                               Padding="10" 
+                               HeightRequest="60">
+                            <Entry x:Name="FullNameEntry" 
+                                   Placeholder="Your full name" 
+                                   PlaceholderColor="#A9A9A9" 
+                                   FontSize="16" 
+                                   BackgroundColor="Transparent" 
+                                   TextColor="Black" 
+                                   ClearButtonVisibility="WhileEditing" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Mobile No" 
+                               FontSize="16" 
+                               TextColor="#000000" 
+                               Margin="0,10,0,5" />
+                        <Frame CornerRadius="10" 
+                               BackgroundColor="#F0F0F0" 
+                               Padding="10" 
+                               HeightRequest="60">
+                            <Entry x:Name="RegisterMobileEntry" 
+                                   Placeholder="Enter your mobile no" 
+                                   PlaceholderColor="#A9A9A9" 
+                                   Keyboard="Telephone" 
+                                   FontSize="16" 
+                                   BackgroundColor="Transparent" 
+                                   TextColor="Black" 
+                                   ClearButtonVisibility="WhileEditing" />
+                        </Frame>
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Text="Password" 
+                               FontSize="16" 
+                               TextColor="#000000" 
+                               Margin="0,10,0,5" />
+                        <Frame CornerRadius="10" 
+                               BackgroundColor="#F0F0F0" 
+                               Padding="10" 
+                               HeightRequest="60">
+                            <Entry x:Name="RegisterPasswordEntry" 
+                                   Placeholder="********" 
+                                   PlaceholderColor="#A9A9A9" 
+                                   IsPassword="True" 
+                                   FontSize="16" 
+                                   BackgroundColor="Transparent" 
+                                   TextColor="Black" 
+                                   ClearButtonVisibility="WhileEditing" />
+                        </Frame>
+                    </StackLayout>
+
+                    <Button Text="Register"
+                            BackgroundColor="#4A90E2"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="50"
+                            FontSize="16"
+                            VerticalOptions="End"
+                            Margin="0,20,0,10"
+                            Clicked="OnRegisterConfirmClicked" />
+                </StackLayout>
+            </Grid>
+
+            <!-- Map Screen -->
+            <Grid x:Name="MapContent" IsVisible="False">
+                <Image Source="uta_campus_map.png"
+                       Aspect="AspectFill"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand" />
+
+                <Frame BackgroundColor="#FFFFFFCC"
+                       CornerRadius="25"
+                       Margin="10,40,10,0"
+                       Padding="10"
+                       VerticalOptions="Start"
+                       HorizontalOptions="FillAndExpand">
+                    <Entry x:Name="SearchEntry"
+                           Placeholder="Search your destination"
+                           PlaceholderColor="#A9A9A9"
+                           FontSize="14"
+                           TextColor="Black"
+                           BackgroundColor="Transparent" 
+                           Completed="OnSearchCompleted"/>
+                </Frame>
+
+                <Frame BackgroundColor="#FFFFFFCC"
+                       CornerRadius="20"
+                       Padding="10"
+                       Margin="10"
+                       VerticalOptions="End"
+                       HorizontalOptions="FillAndExpand">
+                    <StackLayout>
+                        <Label Text="NEARBY PARKING PLACES"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#000000"
+                               Margin="0,0,0,10" />
+                        <StackLayout>
+                            <StackLayout Orientation="Horizontal" Margin="0,5">
+                                <Label Text="College Park South Garage" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       HorizontalOptions="StartAndExpand" />
+                                <Label Text="0.15 mi" FontSize="14" TextColor="#7D7D7D" />
+                            </StackLayout>
+                            <Label Text="29 slots available" FontSize="14" TextColor="#7D7D7D" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <!-- Parking Detail Screen -->
+            <Grid x:Name="DetailsContent" IsVisible="False" Padding="20">
+                <StackLayout>
+                    <Label Text="PARKING DETAIL"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#1E40FF"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,10,0,10" />
+
+                    <Image Source="parking_lot_image.png"
+                           Aspect="AspectFit"
+                           HeightRequest="200"
+                           Margin="0,10,0,10" />
+
+                    <Label Text="Parking lot of West Campus Garage"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#000000"
+                           HorizontalTextAlignment="Center" />
+
+                    <Label Text="440 S Nedderman Dr, Arlington, TX 76013"
+                           FontSize="14"
+                           TextColor="#7D7D7D"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,5,0,10" />
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
+                        <Frame CornerRadius="10" Padding="5" BackgroundColor="#F0F0F0">
+                            <Label Text="250 m" FontSize="14" TextColor="#000000" />
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" BackgroundColor="#F0F0F0">
+                            <Label Text="8 AM - 9 PM" FontSize="14" TextColor="#000000" />
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="5" BackgroundColor="#F0F0F0">
+                            <Label Text="Valet" FontSize="14" TextColor="#000000" />
+                        </Frame>
+                    </StackLayout>
+
+                    <Label Text="RULES"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#1E40FF"
+                           Margin="0,20,0,5" />
+
+                    <Label Text="These rules and regulations govern the use of parking areas at the University of Texas at Arlington (UTA). A fee applies if you do not have a valid parking permit. more..."
+                           FontSize="14"
+                           TextColor="#7D7D7D"
+                           HorizontalTextAlignment="Start" />
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15" Margin="0,20,0,10">
+                        <Frame CornerRadius="10" Padding="10" BackgroundColor="#F0F0F0" HorizontalOptions="Center">
+                            <Label Text="65 slots available"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#1E40FF"
+                                   HorizontalTextAlignment="Center" />
+                        </Frame>
+                        <Frame CornerRadius="10" Padding="10" BackgroundColor="#F0F0F0" HorizontalOptions="Center">
+                            <Label Text="$4.00 per hour"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#1E40FF"
+                                   HorizontalTextAlignment="Center" />
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+
+                <Button Text="Book Parking"
+                        BackgroundColor="#4A90E2"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        FontSize="16"
+                        Margin="0,20,0,0"
+                        VerticalOptions="EndAndExpand"
+                        Clicked="OnBookParkingClicked" />
+            </Grid>
+
+            <!-- Parking Spot Selection Screen -->
+            <Grid x:Name="ParkingSpotContent" IsVisible="False" Padding="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Title -->
+                    <RowDefinition Height="*" />
+                    <!-- Parking Lot Grid -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Continue Button -->
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <Label Grid.Row="0"
+           Text="SELECT YOUR SPOT"
+           FontSize="22"
+           FontAttributes="Bold"
+           TextColor="#1E40FF"
+           HorizontalTextAlignment="Center"
+           Margin="0,10,0,20" />
+
+                <!-- Parking Lot Grid -->
+                <Grid Grid.Row="1"
+          ColumnSpacing="40"
+          VerticalOptions="Center"
+          HorizontalOptions="Center">
+                    <!-- Define Columns -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="10" />
+                        <!-- Vertical Divider -->
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Define Rows -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <!-- Horizontal Divider -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <!-- Horizontal Divider -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <!-- Horizontal Divider -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <!-- Horizontal Divider -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <!-- Horizontal Divider -->
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="5" />
+                        <!-- Horizontal Divider -->
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Left Column (A01 - A07) -->
+                    <Button Grid.Row="0" Grid.Column="0" Text="🚗 A01" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="2" Grid.Column="0" Text="🚗 A02" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="4" Grid.Column="0" Text="🚗 A03" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="6" Grid.Column="0" Text="🚗 A04" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="8" Grid.Column="0" Text="🚗 A05" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="10" Grid.Column="0" Text="🚗 A06" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="12" Grid.Column="0" Text="🚗 A07" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+
+                    <!-- Vertical Divider -->
+                    <BoxView Grid.RowSpan="13" Grid.Column="1" BackgroundColor="Gray" WidthRequest="2" HorizontalOptions="Center" />
+
+                    <!-- Right Column (C01 - C07) -->
+                    <Button Grid.Row="0" Grid.Column="2" Text="🚗 C01" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="2" Grid.Column="2" Text="🚗 C02" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="4" Grid.Column="2" Text="🚗 C03" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="6" Grid.Column="2" Text="🚗 C04" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="8" Grid.Column="2" Text="🚗 C05" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="10" Grid.Column="2" Text="🚗 C06" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+                    <Button Grid.Row="12" Grid.Column="2" Text="🚗 C07" BackgroundColor="White" BorderColor="#4A90E2" BorderWidth="2" CornerRadius="10" HeightRequest="60" WidthRequest="100" Clicked="OnSpotSelected" />
+
+                    <!-- Horizontal Dividers -->
+                    <BoxView Grid.Row="1" Grid.ColumnSpan="3" BackgroundColor="Gray" HeightRequest="2" />
+                    <BoxView Grid.Row="3" Grid.ColumnSpan="3" BackgroundColor="Gray" HeightRequest="2" />
+                    <BoxView Grid.Row="5" Grid.ColumnSpan="3" BackgroundColor="Gray" HeightRequest="2" />
+                    <BoxView Grid.Row="7" Grid.ColumnSpan="3" BackgroundColor="Gray" HeightRequest="2" />
+                    <BoxView Grid.Row="9" Grid.ColumnSpan="3" BackgroundColor="Gray" HeightRequest="2" />
+                    <BoxView Grid.Row="11" Grid.ColumnSpan="3" BackgroundColor="Gray" HeightRequest="2" />
+                </Grid>
+
+                <!-- Continue Button -->
+                <Button Grid.Row="2"
+            Text="Continue"
+            BackgroundColor="#4A90E2"
+            TextColor="White"
+            CornerRadius="10"
+            HeightRequest="50"
+            FontSize="16"
+            Margin="0,20,0,0"
+            VerticalOptions="End"
+            Clicked="OnContinueClicked" />
+            </Grid>
+
+            <!-- Parking Details Content -->
+            <Grid x:Name="ParkingDetailsContent" IsVisible="False" Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Title -->
+                    <RowDefinition Height="200" />
+                    <!-- Illustration -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Time Duration -->
+                    <RowDefinition Height="*" />
+                    <!-- Parking Details -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Buttons -->
+                    <RowDefinition Height="Auto" />
+                    <!-- DatePicker Row -->
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <Label Grid.Row="0"
+                       Text="Parking Detail"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Black"
+                       Margin="0,10,0,5" />
+
+                <!-- Illustration -->
+                <Image Grid.Row="1"
+                       Source="parking_illustration.png"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+
+                <!-- Time Duration -->
+                <StackLayout Grid.Row="2" VerticalOptions="Start" Margin="0,10,0,10">
+                    <Label Text="Time Duration"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           HorizontalOptions="Start" />
+                    <Slider x:Name="DurationSlider"
+                            Minimum="1"
+                            Maximum="24"
+                            Value="4"
+                            ThumbColor="#4A90E2"
+                            MinimumTrackColor="#4A90E2"
+                            MaximumTrackColor="#E0E0E0"
+                            Margin="0,5,0,0" />
+                    <Label x:Name="DurationLabel"
+                           Text="4 hrs"
+                           FontSize="12"
+                           TextColor="Black"
+                           HorizontalOptions="Start"
+                           Margin="0,5,0,0" />
+                </StackLayout>
+
+                <!-- Parking Details -->
+                <StackLayout Grid.Row="3" BackgroundColor="#F3F4F6" Padding="10">
+                    <Label Text="VEHICLE TYPE" FontSize="12" FontAttributes="Bold" TextColor="Black" />
+                    <Label Text="CAR - KA01BQ3232" FontSize="14" TextColor="Black" Margin="0,0,0,10" />
+                    <Label Text="PARKING LOT" FontSize="12" FontAttributes="Bold" TextColor="Black" />
+                    <Label Text="West Campus Garage - Slot A01" FontSize="14" TextColor="Black" Margin="0,0,0,10" />
+                    <Label Text="TOTAL" FontSize="12" FontAttributes="Bold" TextColor="Black" />
+                    <Label x:Name="TotalAmountLabel" Text="$8.00" FontSize="14" FontAttributes="Bold" TextColor="Black" />
+                </StackLayout>
+
+                <!-- DatePicker -->
+                <DatePicker Grid.Row="5"
+                            x:Name="CalendarDatePicker"
+                            IsVisible="False"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                <!-- Buttons -->
+                <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Spacing="20" Margin="10,10,10,10">
+                    <Button Text="Calendar"
+                            BackgroundColor="#4A90E2"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="OnCalendarClicked" />
+                    <Button Text="Confirm &amp; Pay"
+                            BackgroundColor="#4A90E2"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HeightRequest="50"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="OnConfirmPayClicked" />
+                </StackLayout>
+            </Grid>
+
+            <!-- Parking Ticket Content -->
+            <Grid x:Name="ParkingTicketContent" IsVisible="False" Padding="10" BackgroundColor="#4A90E2">
+                <!-- Root Grid Layout -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <!-- Title Row -->
+                    <RowDefinition Height="*" />
+                    <!-- Content Row -->
+                    <RowDefinition Height="Auto" />
+                    <!-- Exit Button Row -->
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <Label Grid.Row="0"
+           Text="Your Parking Ticket"
+           FontSize="22"
+           FontAttributes="Bold"
+           TextColor="White"
+           HorizontalOptions="Center"
+           VerticalOptions="Start"
+           Margin="0,20,0,10" />
+
+                <!-- Content -->
+                <StackLayout Grid.Row="1" Spacing="15" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                    <!-- Parking Details -->
+                    <Frame BackgroundColor="White" CornerRadius="10" Padding="20" Margin="0,10" HorizontalOptions="Center" VerticalOptions="Center">
+                        <StackLayout>
+                            <Label Text="Parking West Campus Garage"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       HorizontalOptions="Center" />
+                            <Label Text="550 S Center St Arlington, TX 76010"
+                       FontSize="12"
+                       TextColor="Gray"
+                       HorizontalOptions="Center" />
+
+                            <BoxView HeightRequest="1" BackgroundColor="#E0E0E0" Margin="0,10" />
+
+                            <Label Text="VEHICLE"
+                       FontSize="12"
+                       FontAttributes="Bold"
+                       TextColor="Gray"
+                       HorizontalOptions="Start" />
+                            <Label Text="CAR - KL07BQ3232"
+                       FontSize="14"
+                       TextColor="Black"
+                       Margin="0,0,0,10"
+                       HorizontalOptions="Start" />
+
+                            <Label Text="DURATION"
+                       FontSize="12"
+                       FontAttributes="Bold"
+                       TextColor="Gray"
+                       HorizontalOptions="Start" />
+                            <Label Text="4 hours - 25 Sep. 2023"
+                       FontSize="14"
+                       TextColor="Black"
+                       Margin="0,0,0,10"
+                       HorizontalOptions="Start" />
+
+                            <Label Text="Slot A01"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       Margin="10,10,10,0" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <!-- Exit Button -->
+                <Button Grid.Row="2"
+            Text="Exit"
+            BackgroundColor="White"
+            TextColor="#4A90E2"
+            FontAttributes="Bold"
+            HeightRequest="50"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End"
+            Clicked="OnExitButtonClicked" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
