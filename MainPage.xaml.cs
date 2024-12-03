@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls;
 
 namespace UTAMavParkSolutions;
 
@@ -164,8 +164,17 @@ public partial class MainPage : ContentPage
 
     private async void OnConfirmPayClicked(object sender, EventArgs e)
     {
-        // Show the Parking Ticket Content
+        // Hide ParkingDetailsContent and show PaymentContent
         ParkingDetailsContent.IsVisible = false;
+        PaymentContent.IsVisible = true;
+
+        await DisplayAlert("Proceeding to Payment", "Redirecting to payment screen.", "OK");
+    }
+
+    private async void OnPaymentCompleted(object sender, EventArgs e)
+    {
+        // Hide PaymentContent and show ParkingTicketContent
+        PaymentContent.IsVisible = false;
         ParkingTicketContent.IsVisible = true;
 
         await DisplayAlert("Payment Successful", "Here is your parking ticket.", "OK");
