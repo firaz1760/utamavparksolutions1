@@ -7,6 +7,7 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+        BindingContext = new AccountViewModel(); // Set BindingContext to the ViewModel
         StartSplashScreen();
 
         // Attach the ValueChanged event for the DurationSlider
@@ -182,11 +183,20 @@ public partial class MainPage : ContentPage
 
     private async void OnExitButtonClicked(object sender, EventArgs e)
     {
-        // Navigate back to the map screen
+        // Hide ParkingTicketContent and show AccountContent
         ParkingTicketContent.IsVisible = false;
-        MapContent.IsVisible = true;
+        AccountContent.IsVisible = true;
 
-        await DisplayAlert("Goodbye", "You have exited the parking ticket screen.", "OK");
+        await DisplayAlert("Returning", "Navigating to your account screen.", "OK");
+    }
+
+    private void OnLogoutClicked(object sender, EventArgs e)
+    {
+        // Navigate back to the login screen
+        AccountContent.IsVisible = false;
+        LoginContent.IsVisible = true;
+
+        DisplayAlert("Logged Out", "You have successfully logged out.", "OK");
     }
 
     private void OnDurationSliderValueChanged(object sender, ValueChangedEventArgs e)
@@ -211,5 +221,42 @@ public partial class MainPage : ContentPage
     {
         // Ensure DatePicker is visible when the calendar button is clicked
         CalendarDatePicker.IsVisible = true;
+    }
+
+    private void OnCloseAccountClicked(object sender, EventArgs e)
+    {
+        // Navigate back to the map screen
+        AccountContent.IsVisible = false;
+        MapContent.IsVisible = true;
+
+        DisplayAlert("Account Settings Closed", "Returning to the main screen.", "OK");
+    }
+
+    private void OnDetailChanged(object sender, TextChangedEventArgs e)
+    {
+        var vm = BindingContext as AccountViewModel;
+        if (vm != null)
+        {
+            vm.CheckIfDetailsFilled();
+        }
+    }
+}
+
+public class AccountViewModel
+{
+    public string FullName { get; set; } = "Ashok Patel";
+    public string EmailAddress { get; set; } = "johndoe@example.com";
+    public string PhoneNumber { get; set; } = "940-367-9260";
+    public string Password { get; set; } = "Date123";
+    public string PaymentMethod { get; set; } = "Visa - **** 6478";
+    public string VehicleDetails { get; set; } = "KA01BQ3232";
+
+    public void CheckIfDetailsFilled()
+    {
+        if (!string.IsNullOrWhiteSpace(VehicleDetails))
+        {
+            // Display alert directly
+            //App.Current.MainPage.DisplayAlert("Detail Updated", "Your account details have been updated.", "OK");
+        }
     }
 }
